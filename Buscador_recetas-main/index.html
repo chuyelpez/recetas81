@@ -76,34 +76,18 @@
     </div>
     <button onclick="toggleChat()" style="position: fixed; bottom: 20px; right: 20px; background: red; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">💬 Chat</button>
 
-    <script>
-        function toggleChat() {
-            let chat = document.getElementById("chat-container");
-            chat.style.display = chat.style.display === "none" ? "block" : "none";
-        }
-
-        function sendMessage() {
-            let input = document.getElementById("userInput").value;
-            let chatbox = document.getElementById("chatbox");
-            chatbox.innerHTML += `<p><b>Usuario:</b> ${input}</p>`;
-            let response = getBotResponse(input);
-            chatbox.innerHTML += `<p><b>Bot:</b> ${response}</p>`;
-            document.getElementById("userInput").value = "";
-        }
-
-        function getBotResponse(input) {
-            let responses = {
-                "hola": "¡Hola! ¿Cómo puedo ayudarte con las recetas?",
-                "receta": "Dime qué ingrediente tienes y te ayudaré a encontrar una receta.",
-                "gracias": "¡De nada! 😊",
-                "default": "Lo siento, no entiendo. ¿Puedes reformular tu pregunta?"
-            };
-            return responses[input.toLowerCase()] || responses["default"];
-        }
-    </script>
-  
-
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/app.js"></script>
+ <script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "51d634ab-72c5-4e54-8517-597fed21d62a", // The ID of this integration.
+    region: "us-south", // The region your integration is hosted in.
+    serviceInstanceID: "c0ce24f1-1e43-4839-b489-91e42fd2714e", // The ID of your service instance.
+    onLoad: async (instance) => { await instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+</script>
 </body>
 </html>
